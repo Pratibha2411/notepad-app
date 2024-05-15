@@ -6,6 +6,8 @@ pipeline {
         SONAR_HOME = tool "sonarScannerTool"
         DOCKERHUB_TOKEN = credentials('dockerHubToken')
         DOCKER_USERNAME = credentials('dockerHubUser')
+        DOCKER_IMAGE_TAG = 'v1.0' // Specify the version or tag
+
     }
 
     stages {
@@ -48,8 +50,8 @@ pipeline {
                 echo 'Pushing to Docker Hub the app'
                 withCredentials([usernamePassword(credentialsId: "dockerHubToken", usernameVariable: "DOCKER_USERNAME", passwordVariable: "DOCKERHUB_TOKEN")]) {
                     sh "docker login -u $DOCKER_USERNAME -p $DOCKERHUB_TOKEN"
-                    sh "docker tag notepad-app $DOCKER_USERNAME/notepad-app:latest"
-                    sh "docker push $DOCKER_USERNAME/notepad-app:latest"
+                    sh "docker tag notepad-app $DOCKER_USERNAME/notepad-app:$DOCKER_IMAGE_TAG" 
+                    sh "docker push $DOCKER_USERNAME/notepad-app:$DOCKER_IMAGE_TAG" 
                 }
             }
         }
