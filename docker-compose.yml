@@ -2,9 +2,10 @@ version: "3.9"
 services:
   web:
     # image: $DOCKER_USERNAME/notepad-app:$DOCKER_IMAGE_TAG
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: $DOCKER_USERNAME/notepad-app:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
     ports:
       - "8000:8000"
     restart: unless-stopped
