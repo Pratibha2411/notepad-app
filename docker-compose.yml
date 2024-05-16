@@ -2,7 +2,7 @@ version: "3.9"
 services:
   web:
     # image: $DOCKER_USERNAME/notepad-app:$DOCKER_IMAGE_TAG
-    image: $DOCKER_USERNAME/notepad-app:latest
+    image: pbaloriya/notepad-app/:latest
     # build:
     #   context: .
     #   dockerfile: Dockerfile
