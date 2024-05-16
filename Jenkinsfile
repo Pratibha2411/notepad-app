@@ -36,7 +36,9 @@ pipeline {
             steps {
                 echo 'Building the app'
 //                sh 'docker --version'
-                sh 'docker build -t notepad-app:$DOCKER_IMAGE_TAG .'
+                // sh 'docker build -t notepad-app:$DOCKER_IMAGE_TAG .'
+                sh 'docker build -t notepad-app .'
+
             }
         }
          stage('Trivy Image Scanner') {
@@ -50,8 +52,10 @@ pipeline {
                 echo 'Pushing to Docker Hub the app'
                 withCredentials([usernamePassword(credentialsId: "dockerHubToken", usernameVariable: "DOCKER_USERNAME", passwordVariable: "DOCKERHUB_TOKEN")]) {
                     sh "docker login -u $DOCKER_USERNAME -p $DOCKERHUB_TOKEN"
-                    sh "docker tag notepad-app $DOCKER_USERNAME/notepad-app:$DOCKER_IMAGE_TAG" 
-                    sh "docker push $DOCKER_USERNAME/notepad-app:$DOCKER_IMAGE_TAG" 
+                    // sh "docker tag notepad-app $DOCKER_USERNAME/notepad-app:$DOCKER_IMAGE_TAG" 
+                    // sh "docker push $DOCKER_USERNAME/notepad-app:$DOCKER_IMAGE_TAG" 
+                    sh "docker tag notepad-app $DOCKER_USERNAME/notepad-app:latest" 
+                    sh "docker push $DOCKER_USERNAME/notepad-app:latest" 
                 }
             }
         }
