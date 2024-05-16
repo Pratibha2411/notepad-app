@@ -36,7 +36,8 @@ pipeline {
             steps {
                 echo 'Building the app'
 //                sh 'docker --version'
-                sh 'docker build -t notepad-app:$DOCKER_IMAGE_TAG .'
+                // sh 'docker build -t notepad-app:$DOCKER_IMAGE_TAG .'
+                sh 'docker build -t $DOCKER_USERNAME/notepad-app:$DOCKER_IMAGE_TAG -f Dockerfile .'
             }
         }
          stage('Trivy Image Scanner') {
