@@ -3,7 +3,8 @@ FROM python:3.9.19-alpine3.19 AS builder
 
 WORKDIR /app/backend
 
-COPY requirements.txt /app/backend
+COPY . /app/backend
+# COPY . .
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
